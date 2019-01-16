@@ -1,0 +1,31 @@
+Estado:
+	Valor total na mesa: double
+	Valor apostado: double
+	Cartas na mesa: Cartas[]
+	
+	
+Numero de jogadores
+id dos jogadores
+small blind: player x
+big blind: player y
+player1: cartas:
+player2: cartas:
+playern: cartas:
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+flop: # # #
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+turn: #
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+river: #
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+resultado: 	player1 - mao - valor recebido
+			player2 - mao - valor recebido
+			playern - mao - valor recebido
