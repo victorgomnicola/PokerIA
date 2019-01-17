@@ -12,7 +12,7 @@ class Mesa:
 
     def __init__(self, jogadores, id_mesa, big_blind = 100, raiseCaps = 5):
         
-    	#####Player attributes
+        #####Player attributes
         self.jogadores = jogadores
         self.nJogadores = len(self.jogadores)
 
@@ -25,21 +25,21 @@ class Mesa:
         self.baralho = Baralho()
         self.raiseCaps = raiseCaps
         self.valorMesa = 0
-       	self.valorApostado = 0
+        self.valorApostado = 0
 
 
     def iniciarJogo(self):
         
         for i in range(1000):
 
-        	#Game setup
-        	button = i%self.nJogadores
+            #Game setup
+            button = i%self.nJogadores
             self.baralho.iniciarBaralho()
             distribuirCartas(self, button)
-	        self.valorMesa = 0
-	       	self.valorApostado = 0
+            self.valorMesa = 0
+            self.valorApostado = 0
 
-        	#Logger
+            #Logger
             game_logger = Logger(self.idMesa, i)
             game_logger.log_header(self.jogadores)
 
@@ -57,19 +57,19 @@ class Mesa:
             self.jogadores[(button + 1 + i)%self.nJogadores].mao.append(baralho.tirarCarta())
 
     def comecarJogo(self, button):
-    	self.jogadores[(button+1)%self.nJogadores].montante -= smallBlind
-    	self.jogadores[(button+2)%self.nJogadores].montante -= smallBlind
+        self.jogadores[(button+1)%self.nJogadores].montante -= smallBlind
+        self.jogadores[(button+2)%self.nJogadores].montante -= smallBlind
 
 
 
     def apostar(self, logger):
-    	
-    	t = (button+3)%self.nJogadores
+        
+        t = (button+3)%self.nJogadores
         raise_marker = (button+2)%self.nJogadores
         n_raises = 0 
 
         while(raise_marker!=t):
-        	
-        	if(self.jogadores[t].estaJogando):
-        		action = self.jogadores[t].getAcao({'valorMesa':self.valorMesa, 'valorApostado':valorApostado}, n_raises< self.raiseCaps, {'table': self.idMesa, 'game':i})
-        		
+            
+            if(self.jogadores[t].estaJogando):
+                action = self.jogadores[t].getAcao({'valorMesa':self.valorMesa, 'valorApostado':valorApostado}, n_raises< self.raiseCaps, {'table': self.idMesa, 'game':i})
+                
