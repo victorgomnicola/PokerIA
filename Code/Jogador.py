@@ -6,12 +6,14 @@ Created on Wed Jan 16 20:36:29 2019
 """
 
 class Jogador:
-    def __init__(self, id):
-        self.mao = []
-        self.montante = 0
-        self.estaJogando = False
-        self.idJogador
+
+    def __init__(self, id, montante = 3000):
         
-    def getAcao(self, Estado, Log):
+        self.mao = []
+        self.montante = montante
+        self.estaJogando = True
+        self.idJogador = id
+        
+    def getAcao(self, Estado, can_raise, Log):
         pass
     
