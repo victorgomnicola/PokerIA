@@ -19,7 +19,7 @@ class Jogador:
     	self.montante-=x
     	self.aposta+=x
     
-    def check(self, mesa_aposta):
+    def call(self, mesa_aposta):
     	dif = mesa_aposta - self.aposta
     	self.montante-= dif
     	return dif
