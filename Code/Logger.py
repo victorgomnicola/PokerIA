@@ -1,4 +1,5 @@
 
+from Jogador import Jogador
 
 class Logger:
 	
@@ -26,3 +27,8 @@ class Logger:
 			f.write("*******Starting Game*******\n")
 			f.write('Jogador' + str(self.jogadores[(button+1)%len(jogadores)].idJogador) + ':posts_smallBlind:' + str(big_blind/2)+"\n")
 			f.write('Jogador' + str(self.jogadores[(button+2)%len(jogadores)].idJogador) + ':posts_bigBlind:' + str(big_blind)+"\n")
+
+	def log_bet(self, player, bet, value):
+
+		with f as open(self.log_hyperstring,'a'):
+			f.write('Jogador'+str(player.idJogador)+":"+bet+":"+str(value))

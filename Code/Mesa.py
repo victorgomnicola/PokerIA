@@ -26,6 +26,7 @@ class Mesa:
         self.raiseCaps = raiseCaps
         self.valorMesa = 0
         self.valorApostado = 0
+        self.cartas = ['b','b','b','b','b']
 
 
     def iniciarJogo(self):
@@ -48,17 +49,17 @@ class Mesa:
             game_logger.log_start(self.jogadores,button,self.bigBlind)
 
             #Betting starts
-
+            self.apostar(game_logger)
             
     def distribuirCartas(self, button):
         
-        for i in range(0, self.nJogadores):
-            self.jogadores[(button + 1 + i)%self.nJogadores].mao.append(baralho.tirarCarta())
-            self.jogadores[(button + 1 + i)%self.nJogadores].mao.append(baralho.tirarCarta())
+        for i in range(self.nJogadores):
+            self.jogadores[(button + 1 + i)%self.nJogadores].mao[0] = baralho.tirarCarta()
+            self.jogadores[(button + 1 + i)%self.nJogadores].mao[1] = baralho.tirarCarta()
 
     def comecarJogo(self, button):
-        self.jogadores[(button+1)%self.nJogadores].montante -= smallBlind
-        self.jogadores[(button+2)%self.nJogadores].montante -= smallBlind
+        self.jogadores[(button+1)%self.nJogadores].aposta(smallBlind)
+        self.jogadores[(button+2)%self.nJogadores].aposta(bigBlind)
 
 
 
@@ -71,5 +72,26 @@ class Mesa:
         while(raise_marker!=t):
             
             if(self.jogadores[t].estaJogando):
-                action = self.jogadores[t].getAcao({'valorMesa':self.valorMesa, 'valorApostado':valorApostado}, n_raises< self.raiseCaps, {'table': self.idMesa, 'game':i})
+
+                action = self.jogadores[t].getAcao({'valorMesa':self.valorMesa, 'cartas': self.cartas, 'valorApostado':valorApostado}, n_raises< self.raiseCaps, {'table': self.idMesa, 'game':i})                
+                if(action==-1):
+                    ##Player folds
+                    self.jogadores[t].estaJogando= False
+                    logger.log_bet(self.jogadores[t], 'folds', 0)
                 
+                elif(action==0):
+                    ##Player checks
+                    check_dif = self.jogadores[t].check(self.valorApostado)
+                    self.valorMesa += check_dif
+                    logger.log_bet(self.jogadores[t], 'checks', check_dif)
+
+                elif(action>0):
+                    ##Player raises
+                    raise_dif = self.jogadores[t].check(self.valorApostado+ action)
+                    self.valorApostado+= action
+                    logger.log_bet(self.jogadores[t], 'raises', raise_dif)
+
+                else:
+                    raise ValueError('No valid action value')
+
+            t = (t+1)%self.nJogadores
