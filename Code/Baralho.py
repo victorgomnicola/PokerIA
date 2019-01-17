@@ -10,7 +10,7 @@ class Baralho:
         self.cartas = []
         
     def iniciarBaralho(self):
-        for i in range(1,13):
+        for i in range(1,14):
             for j in ['o', 'e', 'c', 'p']:
                 self.cartas.append(str(i) + j)
                 

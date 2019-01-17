@@ -1,0 +1,77 @@
+Estado:
+	Valor total na mesa: double
+	Valor apostado: double
+	Cartas na mesa: Cartas[]
+	
+	
+Numero de jogadores
+id dos jogadores
+small blind: player x
+big blind: player y
+player1: cartas:
+player2: cartas:
+playern: cartas:
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+flop: # # #
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+turn: #
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+river: #
+jogadaPlayer1: aposta $valor
+jogadaPlayer2: aposta $valor
+jogadaPlayern: aposta $valor
+resultado: 	player1 - mao - valor recebido
+			player2 - mao - valor recebido
+			playern - mao - valor recebido
+
+
+
+
+
+PokerIA Hand #idJogo:  Hold'em No Limit (50/100) - data/hora
+Table 'Mesa42' 9-max (Play Money) Seat #buttonID is the button
+number of players: 5
+Seat 2: playerXId (14300 in chips) 
+Seat 5: playerYId (40509 in chips) 
+Seat 6: playerZId (9900 in chips) 
+Seat 7: playerWId (18233 in chips) 
+Seat 8: playerKId (10000 in chips) 
+playerZId: posts small blind 50
+playerWId: posts big blind 100
+playerKId: posts small & big blinds 150
+*** HOLE CARDS ***
+playerKId: checks 
+playerXId: calls 100
+playerYId: folds 
+playerZId: folds 
+playerWId: checks 
+*** FLOP *** [4d Qs 2s]
+playerWId: checks 
+playerKId: checks 
+playerXId: checks 
+*** TURN *** [4d Qs 2s] [Jc]
+playerWId: checks 
+playerKId: folds 
+playerKId leaves the table
+playerXId: checks 
+*** RIVER *** [4d Qs 2s Jc] [Kc]
+playerWId: checks 
+playerXId: checks 
+*** SHOW DOWN ***
+playerWId: shows [8s Ac] (high card Ace)
+playerXId: mucks hand 
+playerWId collected 378 from pot
+*** SUMMARY ***
+Total pot 400 | Rake 22 
+Board [4d Qs 2s Jc Kc]
+Seat 2: playerXId mucked
+Seat 5: playerYId (button) folded before Flop (didn't bet)
+Seat 6: playerZId (small blind) folded before Flop
+Seat 7: playerWId (big blind) showed [8s Ac] and won (378) with high card Ace
+Seat 8: playerKId folded on the Turn (didn't bet)
