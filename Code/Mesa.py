@@ -67,5 +67,9 @@ class Mesa:
     	t = (button+3)%self.nJogadores
         raise_marker = (button+2)%self.nJogadores
         n_raises = 0 
+
         while(raise_marker!=t):
-        	self.jogadores[t].getAcao({'valorMesa':self.valorMesa, 'valorApostado':valorApostado}, n_raises< self.raiseCaps, {'table': self.idMesa, 'game':i})
+        	
+        	if(self.jogadores[t].estaJogando):
+        		action = self.jogadores[t].getAcao({'valorMesa':self.valorMesa, 'valorApostado':valorApostado}, n_raises< self.raiseCaps, {'table': self.idMesa, 'game':i})
+        		
