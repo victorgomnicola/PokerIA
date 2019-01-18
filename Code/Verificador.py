@@ -10,13 +10,13 @@ class Verificador:
 
 	def contaIguais(self, mao):
 		highest_card = mao[0][1]
-		count = 1
+		count = 0
 		two_pairs= False
 		
-		for i in range(len(mao)-1):
+		for i in range(len(mao)):
 
 			count_aux = 0
-			for j in range(i+1, len(mao)):
+			for j in range(i, len(mao)):
 				if (mao[i][1] == mao[j][1]):
 					count_aux+=1
 			
@@ -30,19 +30,22 @@ class Verificador:
 				count = count_aux
 				highest_card = mao[i][1]
 
-		ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in hand if card[0]!=highest_card])
+		ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[0]!=highest_card])
 		
 		if (two_pairs):
-			rest_hand = sorted([card for card in hand if card[0]!=highest_card])
+			rest_hand = sorted([card for card in mao if card[0]!=highest_card])
 			aux_count =1
 			aux_value = rest_hand[0][1]
+			
 			for card in rest_hand:
 				if card[1] == aux_value:
 					aux_count+=1
+			
 			if(aux_count==2):
-				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in hand if card[0]!=highest_card])
+				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[0]!=highest_card])
+			
 			else:
-				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in hand if card[0]!=highest_card], reverse= True)
+				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[0]!=highest_card], reverse= True)
 		
 		return (count, ordered_hand, two_pairs)
 
@@ -65,7 +68,7 @@ class Verificador:
 		sorted_hand = sorted(hand, key = lambda x: x[1], reverse = True)
 		
 		for i in range(len(hand)-1):
-			if sorted_hand[i]-sorted_hand[i+1]!= 1:
+			if sorted_hand[i][1]-sorted_hand[i+1][1]!= 1:
 				return False
 		return True
 
@@ -83,7 +86,7 @@ class Verificador:
 			## Straight flush
 			return (9, sorted_hand)
 
-		count , count_hand, two_pairs = contaIguais(hand)
+		count , count_hand, two_pairs = self.contaIguais(hand)
 
 		if (count ==4):
 			## Four of a kind
@@ -107,7 +110,7 @@ class Verificador:
 		
 		elif (two_pairs):
 			## Two pairs
-			return(3, count_aux)
+			return(3, count_hand)
 		
 		else:
 			#One pair or less
@@ -118,7 +121,7 @@ class Verificador:
 		best_hand = [('b',-1)]
 
 		for hand in combinations(result, 5):
-			score, h = verificaMao(hand)
+			score, h = self.verificaMao(hand)
 			if(score> best_score):
 				best_score = score
 				best_hand= h
@@ -154,10 +157,10 @@ class Verificador:
 						break
 				## Pops out the losers
 				for s in range(1,len(potential_winners)):
-					if(self.breakTie(player_scores[0], player_scores[s]) = 1):
+					if(self.breakTie(player_scores[0], player_scores[s]) == 1):
 						potential_winners.pop(s)
 						break
-					elif(self.breakTie(player_scores[0], player_scores[s]) =-1):
+					elif(self.breakTie(player_scores[0], player_scores[s]) ==-1):
 						potential_winners.pop(0)
 						break
 

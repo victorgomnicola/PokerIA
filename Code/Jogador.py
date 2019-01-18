@@ -15,7 +15,7 @@ class Jogador:
         self.estaJogando = True
         self.idJogador = id
 
-    def aposta(self, x):
+    def apostar(self, x):
     	self.montante-=x
     	self.aposta+=x
     
@@ -25,5 +25,5 @@ class Jogador:
     	return dif
         
     def getAcao(self, Estado, Log):
-        pass
+        return 0
     
