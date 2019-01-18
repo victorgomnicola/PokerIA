@@ -27,7 +27,7 @@ class Jogador:
     	return dif
         
     def getAcao(self, Estado, Log):
-        return random.randint(-1,1)
+        return 0
 
     def reset(self):
     	self.aposta=0

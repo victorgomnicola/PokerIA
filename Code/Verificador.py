@@ -126,7 +126,6 @@ class Verificador:
 			if( score == best_score and best_hand[0][1]< h[0][1]):
 				best_hand = h
 
-		print(best_score, best_hand)
 		return (best_score, best_hand)
 
 	def matchWinner(self, table_cards, players):
@@ -145,8 +144,6 @@ class Verificador:
 		
 		if(len(potential_winners)>1):
 			#Tie
-			print(potential_winners)
-			print([player_scores[s]  for s in potential_winners])
 			flag = True
 			while(flag):
 				flag = False
@@ -163,10 +160,10 @@ class Verificador:
 					#print('listt', [player_scores[p] for p in potential_winners])
 					#print('candidates',potential_winners[0], potential_winners[s])
 					if(self.breakTie(player_scores[potential_winners[0]], player_scores[potential_winners[s]]) == -1):
-						print('popping',potential_winners.pop(s))
+						potential_winners.pop(s)
 						break
 					elif(self.breakTie(player_scores[potential_winners[0]], player_scores[potential_winners[s]]) ==1):
-						print('pooping',potential_winners.pop(0))
+						potential_winners.pop(0)
 						break
 
 		return potential_winners		
@@ -183,7 +180,6 @@ class Verificador:
 				hand2[-1] = 0
 
 			for i in range(len(hand1)):
-				print(merged_hands)
 				if(merged_hands[i]>0):
 					return -1
 				if(merged_hands[i]<0):

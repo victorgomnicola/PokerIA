@@ -32,7 +32,7 @@ class Mesa:
 
     def iniciarJogo(self):
         
-        for i in range(1):
+        for i in range(10):
 
             #Game setup
             button = i%self.nJogadores

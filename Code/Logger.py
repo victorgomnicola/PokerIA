@@ -6,7 +6,7 @@ class Logger:
     def __init__(self, table, game):
         self.table = table
         self.game = game
-        self.log_hyperstring = str(table)+"_"+str(game)+".txt"
+        self.log_hyperstring = "./"+str(table)+"/"+str(game)+".txt"
 
     def log_header(self, players):
 
