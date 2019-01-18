@@ -148,7 +148,7 @@ class Verificador:
 			print(potential_winners)
 			print([player_scores[s]  for s in potential_winners])
 			flag = True
-			while(flag or len(potential_winners)>1):
+			while(flag):
 				flag = False
 
 				
@@ -157,12 +157,15 @@ class Verificador:
 					if(self.breakTie(player_scores[potential_winners[s]], player_scores[potential_winners[s+1]])!=0):
 						flag = True
 						break
+
 				## Pops out the losers
 				for s in range(1,len(potential_winners)):
-					if(self.breakTie(player_scores[0], player_scores[s]) == 1):
+					#print('listt', [player_scores[p] for p in potential_winners])
+					#print('candidates',potential_winners[0], potential_winners[s])
+					if(self.breakTie(player_scores[potential_winners[0]], player_scores[potential_winners[s]]) == -1):
 						print('popping',potential_winners.pop(s))
 						break
-					elif(self.breakTie(player_scores[0], player_scores[s]) ==-1):
+					elif(self.breakTie(player_scores[potential_winners[0]], player_scores[potential_winners[s]]) ==1):
 						print('pooping',potential_winners.pop(0))
 						break
 
@@ -172,6 +175,7 @@ class Verificador:
 	def breakTie(self, score1, score2):
 		hand1 = [h[1] for h in score1[1]]
 		hand2 = [h[1] for h in score2[1]]
+		merged_hands =[hand1[i] - hand2[i] for i in range(len(hand1))]
 		if score1[0] in [3,7]:
 			
 			if score1[0] == 3:
@@ -179,16 +183,17 @@ class Verificador:
 				hand2[-1] = 0
 
 			for i in range(len(hand1)):
-				if(hand1[1]> hand2[1]):
+				print(merged_hands)
+				if(merged_hands[i]>0):
 					return -1
-				if(hand1[1]< hand2[1]):
+				if(merged_hands[i]<0):
 					return 1
 			return 0
 		
 		else:
-			if hand1[0]> hand2[0]:
+			if hand1[1]> hand2[1]:
 				return -1
-			elif hand1[0]== hand2[0]:
+			elif hand1[1]== hand2[1]:
 				return 0
 			else:
 				return 1

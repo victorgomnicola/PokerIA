@@ -4,6 +4,7 @@ Created on Wed Jan 16 20:36:29 2019
 
 @author: victo
 """
+import random
 
 class Jogador:
 
@@ -26,7 +27,7 @@ class Jogador:
     	return dif
         
     def getAcao(self, Estado, Log):
-        return 0
+        return random.randint(-1,1)
 
     def reset(self):
     	self.aposta=0
