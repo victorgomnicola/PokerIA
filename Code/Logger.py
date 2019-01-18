@@ -18,7 +18,14 @@ class Logger:
             f.writelines(["Jogador"+str(player.idJogador) + ":" + player.mao[0] + "/"+player.mao[1] + "\n" for player in players])
             f.write("Players chips\n")
             f.writelines(["Jogador" + str(player.idJogador) + ":" + str(player.montante) + "\n" for player in players])
-
+            
+        ##prints
+        print("PokerIA game \n")
+        print("Table:"+ str(table)+"\n")
+        print("Game:" + str(game)+"\n")
+        print("Players chips\n")
+        for l in ["Jogador" + str(player.idJogador) + ":" + str(player.montante) + "\n" for player in players]:
+            print(l)
 
 
     def log_start(self, jogadores, button, big_blind):
@@ -28,12 +35,31 @@ class Logger:
             f.write('Jogador' + str(self.jogadores[(button+1)%len(jogadores)].idJogador) + ':posts_smallBlind:' + str(big_blind/2) + "\n")
             f.write('Jogador' + str(self.jogadores[(button+2)%len(jogadores)].idJogador) + ':posts_bigBlind:' + str(big_blind) + "\n")
 
+        print("*******Starting Game*******\n")
+        print('Jogador' + str(self.jogadores[(button+1)%len(jogadores)].idJogador) + ':posts_smallBlind:' + str(big_blind/2) + "\n")
+        print('Jogador' + str(self.jogadores[(button+2)%len(jogadores)].idJogador) + ':posts_bigBlind:' + str(big_blind) + "\n")
+
+
     def log_bet(self, player, bet, value):
 
         with f as open(self.log_hyperstring,'a'):
             f.write('Jogador' + str(player.idJogador)+":" + bet + ":" + str(value))
-            
+        
+        print('Jogador' + str(player.idJogador)+":" + bet + ":" + str(value))
+    
+    
     def log_cartas_viradas(self, turn_name,cartas):
         with f as open(self.log_hyperstring,'a'):
             f.write("*******"+turn_name+"*******\n")
-            f.write("Cartas na mesa:" + cartas[0] + ":" + cartas[1] + ":" + cartas[2] + ":" + cartas[3] + ":" + cartas[4] + ":")
+            f.write("Cartas na mesa:" + cartas[0] + ":" + cartas[1] + ":" + cartas[2] + ":" + cartas[3] + ":" + cartas[4] )
+
+        print("*******"+turn_name+"*******\n")
+        print("Cartas na mesa:" + cartas[0] + ":" + cartas[1] + ":" + cartas[2] + ":" + cartas[3] + ":" + cartas[4])
+
+    def log_win(self, player, amount):
+        with f as open(self.log_hyperstring,'a'):
+            f.write("*******Winner*******\n")
+            f.write("Jogador"+str(player.idJogador)+":won:"+str(amount))
+        
+        print("*******Winner*******\n")
+        print("Jogador"+str(player.idJogador)+":won:"+str(amount))

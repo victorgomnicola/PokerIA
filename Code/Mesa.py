@@ -68,6 +68,9 @@ class Mesa:
         
             #show results
             winners = self.Verificador.matchWinner(self.cartas, self.jogadores)
+            for w in winners:
+                self.jogadores[w].montante += self.valorMesa/len(winners)
+                game_logger.log_win(self.jogadores[w], self.valorMesa/len(winners))
 
     def distribuirCartas(self, button):
         
@@ -108,7 +111,7 @@ class Mesa:
                     self.valorMesa += call_dif
                     if call_dif >0:
                         logger.log_bet(self.jogadores[playerTurn], 'calls', call_dif)
-                    if call_dif ==0:
+                    if call_dif == 0:
                         logger.log_bet(self.jogadores[playerTurn],'checks', 0)
                 
                 elif(action>0):
