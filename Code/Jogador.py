@@ -9,7 +9,7 @@ class Jogador:
 
     def __init__(self, id, montante = 3000):
         
-        self.mao = ['b','b']
+        self.mao = [('b',-1),('b',-1)]
         self.montante = montante
         self.aposta = 0
         self.estaJogando = True
@@ -24,6 +24,6 @@ class Jogador:
     	self.montante-= dif
     	return dif
         
-    def getAcao(self, Estado, can_raise, Log):
+    def getAcao(self, Estado, Log):
         pass
     

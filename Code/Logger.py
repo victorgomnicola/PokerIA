@@ -33,7 +33,7 @@ class Logger:
         with f as open(self.log_hyperstring,'a'):
             f.write('Jogador' + str(player.idJogador)+":" + bet + ":" + str(value))
             
-    def log_cartas_viradas(self, cartas):
+    def log_cartas_viradas(self, turn_name,cartas):
         with f as open(self.log_hyperstring,'a'):
-            f.write("*******Flop*******\n")
+            f.write("*******"+turn_name+"*******\n")
             f.write("Cartas na mesa:" + cartas[0] + ":" + cartas[1] + ":" + cartas[2] + ":" + cartas[3] + ":" + cartas[4] + ":")

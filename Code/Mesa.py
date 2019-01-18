@@ -6,6 +6,7 @@ Created on Wed Jan 16 20:36:16 2019
 """
 from Baralho import Baralho
 from Logger import Logger
+from Verificador import Verificador
 
 class Mesa:
 
@@ -25,8 +26,8 @@ class Mesa:
         self.raiseCaps = raiseCaps
         self.valorMesa = 0
         self.valorApostado = 0
-        self.cartas = ['b','b','b','b','b']
-        self.playerTurn = 0
+        self.cartas = [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]
+        self.Verificador = Verificador()
 
 
     def iniciarJogo(self):
@@ -35,7 +36,6 @@ class Mesa:
 
             #Game setup
             button = i%self.nJogadores
-            playerTurn = button + 1
             self.baralho.iniciarBaralho()
             self.distribuirCartas(self, button)
             self.valorMesa = 0
@@ -48,41 +48,27 @@ class Mesa:
             #Start game
             self.comecarJogo()
             game_logger.log_start(self.jogadores,button,self.bigBlind)
-            
-            playerTurn = (playerTurn + 2)%self.jogadores
-            
+
             #Betting starts
-            self.apostar(game_logger, playerTurn)
+            playerTurn = (button +3) % self.nJogadores
+            playerTurn = self.apostar(game_logger, playerTurn)
             
-            #Turn the flop
-            self.flop
+            #Flop
+            self.flop()
+            playerTurn = self.apostar(game_logger, playerTurn)
             
-            self.valorApostado = 0
-            
-            #Betting restarts
-            self.apostar(game_logger, playerTurn)
-            
-            #Turn the turn
-            self.turn
-            
-            #reset bets
-            self.valorApostado = 0
-            
-            #Betting restarts
-            self.apostar(game_logger, playerTurn)
-            
-            #turn the river
-            self.river
-            
-            #reset bets
-            self.valorApostado = 0
-            
-            #Betting restarts again
-            self.apostar(game_logger, playerTurn)
+            #Turn
+            self.turn()
+            playerTurn = self.apostar(game_logger, playerTurn)
             
             
+            #River
+            self.river()
+            playerTurn = self.apostar(game_logger, playerTurn)
+        
             #show results
-            
+            winners = self.Verificador.matchWinner(self.cartas, self.jogadores)
+
     def distribuirCartas(self, button):
         
         for i in range(self.nJogadores):
@@ -92,12 +78,15 @@ class Mesa:
     def comecarJogo(self, button):
         self.jogadores[(button+1)%self.nJogadores].aposta(self.smallBlind)
         self.jogadores[(button+2)%self.nJogadores].aposta(self.bigBlind)
+        self.valorApostado = self.bigBlind
+        self.valorMesa = self.bigBlind+ self.smallBlind
+            
 
 
 
-    def apostar(self, logger, playerTurn):
+    def apostar(self, logger, t):
         
-        
+        playerTurn = t
         raise_marker = (playerTurn)%self.nJogadores
         n_raises = 0
 
@@ -113,11 +102,15 @@ class Mesa:
                     logger.log_bet(self.jogadores[playerTurn], 'folds', 0)
                 
                 elif(action==0):
-                    ##Player checks
+                    
+                    ##Player checks or checks
                     call_dif = self.jogadores[playerTurn].call(self.valorApostado)
                     self.valorMesa += call_dif
-                    logger.log_bet(self.jogadores[playerTurn], 'calls', call_dif)
-
+                    if call_dif >0:
+                        logger.log_bet(self.jogadores[playerTurn], 'calls', call_dif)
+                    if call_dif ==0:
+                        logger.log_bet(self.jogadores[playerTurn],'checks', 0)
+                
                 elif(action>0):
                     ##Player raises
                     raise_dif = self.jogadores[playerTurn].call(self.valorApostado + action)
@@ -131,17 +124,19 @@ class Mesa:
                     raise ValueError('No valid action value')
 
             playerTurn = (playerTurn+1)%self.nJogadores
+        
+        return raise_marker
 
     def flop(self, logger):
         self.cartas[0] = self.baralho.tirarCartas()
         self.cartas[1] = self.baralho.tirarCartas()
         self.cartas[2] = self.baralho.tirarCartas()
-        logger.log_cartas_viradas(cartas)
+        logger.log_cartas_viradas('flop',cartas)
 
     def turn(self):
-         self.cartas[3] = self.baralho.tirarCartas()
-         logger.log_cartas_viradas(cartas)
+        self.cartas[3] = self.baralho.tirarCartas()
+        logger.log_cartas_viradas('turn',cartas)
          
     def river(self):
-         self.cartas[4] = self.baralho.tirarCartas()
-         logger.log_cartas_viradas(cartas)
+        self.cartas[4] = self.baralho.tirarCartas()
+        logger.log_cartas_viradas('river',cartas)

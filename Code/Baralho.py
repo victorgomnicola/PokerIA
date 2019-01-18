@@ -13,9 +13,9 @@ class Baralho:
         
     def iniciarBaralho(self):
         self.cartas = []
-        for i in range(1,14):
+        for i in range(2,14):
             for j in ['o', 'e', 'c', 'p']:
-                self.cartas.append(str(i) + j)
+                self.cartas.append((j, i))
 
         self.embaralhar()
                               
