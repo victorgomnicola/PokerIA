@@ -30,10 +30,10 @@ class Verificador:
 				count = count_aux
 				highest_card = mao[i][1]
 
-		ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[0]!=highest_card])
+		ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[1]!=highest_card], key =lambda x:x[1])
 		
 		if (two_pairs):
-			rest_hand = sorted([card for card in mao if card[0]!=highest_card])
+			rest_hand = sorted([card for card in mao if card[1]!=highest_card], key =lambda x:x[1])
 			aux_count =1
 			aux_value = rest_hand[0][1]
 			
@@ -42,11 +42,11 @@ class Verificador:
 					aux_count+=1
 			
 			if(aux_count==2):
-				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[0]!=highest_card])
+				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[1]!=highest_card], key =lambda x:x[1], reverse= True)
+							
+			else :
+				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[1]!=highest_card], key =lambda x:x[1])
 			
-			else:
-				ordered_hand = [card for card in mao if card[1]==highest_card]+ sorted([card for card in mao if card[0]!=highest_card], reverse= True)
-		
 		return (count, ordered_hand, two_pairs)
 
 	def verificaFullHouse(self, hand):
@@ -66,7 +66,6 @@ class Verificador:
 	def verificaStraight(self, hand):
 		
 		sorted_hand = sorted(hand, key = lambda x: x[1], reverse = True)
-		
 		for i in range(len(hand)-1):
 			if sorted_hand[i][1]-sorted_hand[i+1][1]!= 1:
 				return False
@@ -87,7 +86,6 @@ class Verificador:
 			return (9, sorted_hand)
 
 		count , count_hand, two_pairs = self.contaIguais(hand)
-
 		if (count ==4):
 			## Four of a kind
 			return (8, count_hand)
@@ -128,6 +126,7 @@ class Verificador:
 			if( score == best_score and best_hand[0][1]< h[0][1]):
 				best_hand = h
 
+		print(best_score, best_hand)
 		return (best_score, best_hand)
 
 	def matchWinner(self, table_cards, players):
@@ -146,9 +145,12 @@ class Verificador:
 		
 		if(len(potential_winners)>1):
 			#Tie
+			print(potential_winners)
+			print([player_scores[s]  for s in potential_winners])
 			flag = True
 			while(flag or len(potential_winners)>1):
 				flag = False
+
 				
 				## Checks for multiple ties
 				for s in range(len(potential_winners)-1):
@@ -158,10 +160,10 @@ class Verificador:
 				## Pops out the losers
 				for s in range(1,len(potential_winners)):
 					if(self.breakTie(player_scores[0], player_scores[s]) == 1):
-						potential_winners.pop(s)
+						print('popping',potential_winners.pop(s))
 						break
 					elif(self.breakTie(player_scores[0], player_scores[s]) ==-1):
-						potential_winners.pop(0)
+						print('pooping',potential_winners.pop(0))
 						break
 
 		return potential_winners		
@@ -170,7 +172,6 @@ class Verificador:
 	def breakTie(self, score1, score2):
 		hand1 = [h[1] for h in score1[1]]
 		hand2 = [h[1] for h in score2[1]]
-
 		if score1[0] in [3,7]:
 			
 			if score1[0] == 3:

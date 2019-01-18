@@ -68,9 +68,12 @@ class Mesa:
         
             #show results
             winners = self.Verificador.matchWinner(self.cartas, self.jogadores)
+            
             for w in winners:
                 self.jogadores[w].montante += self.valorMesa/len(winners)
                 game_logger.log_win(self.jogadores[w], self.valorMesa/len(winners))
+
+            self.reset_mesa()
 
     def distribuirCartas(self, button):
         
@@ -142,3 +145,13 @@ class Mesa:
     def river(self, logger):
         self.cartas[4] = self.baralho.tirarCarta()
         logger.log_cartas_viradas('river',self.cartas)
+
+    def reset_mesa(self):
+        
+        self.valorMesa = 0
+        self.valorApostado=0
+        
+        for jogador in self.jogadores:
+            jogador.reset()
+        self.cartas = [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]
+        self.baralho.iniciarBaralho()

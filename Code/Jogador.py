@@ -21,9 +21,13 @@ class Jogador:
     
     def call(self, mesa_aposta):
     	dif = mesa_aposta - self.aposta
+    	self.aposta = self.aposta+ dif
     	self.montante-= dif
     	return dif
         
     def getAcao(self, Estado, Log):
         return 0
+
+    def reset(self):
+    	self.aposta=0
     

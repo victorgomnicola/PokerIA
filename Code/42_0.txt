@@ -1,0 +1,42 @@
+PokerIA game 
+Table:42
+Game:0
+Players cards
+Jogador0:('p', 4)/('p', 12)
+Jogador1:('e', 6)/('o', 11)
+Jogador2:('c', 7)/('c', 11)
+Jogador3:('p', 8)/('e', 5)
+Jogador4:('p', 6)/('p', 11)
+Players chips
+Jogador0:3000
+Jogador1:3000
+Jogador2:3000
+Jogador3:3000
+Jogador4:3000
+*******Starting Game*******
+Jogador1:posts_smallBlind:50.0
+Jogador2:posts_bigBlind:100
+Jogador3:calls:100
+Jogador4:calls:100
+Jogador0:calls:100
+Jogador1:calls:50.0
+*******flop*******
+Cartas na mesa:('e', 12):('c', 6):('c', 2):('b', -1):('b', -1)
+Jogador2:checks:0
+Jogador3:checks:0
+Jogador4:checks:0
+Jogador0:checks:0
+*******turn*******
+Cartas na mesa:('e', 12):('c', 6):('c', 2):('e', 2):('b', -1)
+Jogador1:checks:0
+Jogador2:checks:0
+Jogador3:checks:0
+Jogador4:checks:0
+*******river*******
+Cartas na mesa:('e', 12):('c', 6):('c', 2):('e', 2):('p', 7)
+Jogador0:checks:0
+Jogador1:checks:0
+Jogador2:checks:0
+Jogador3:checks:0
+*******Winner*******
+Jogador4:won:500.0

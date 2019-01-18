@@ -6,7 +6,7 @@ class Logger:
     def __init__(self, table, game):
         self.table = table
         self.game = game
-        self.log_hyperstring = str(table)+"_"+str(game)+".vic"
+        self.log_hyperstring = str(table)+"_"+str(game)+".txt"
 
     def log_header(self, players):
 
@@ -43,7 +43,7 @@ class Logger:
     def log_bet(self, player, bet, value):
 
         with open(self.log_hyperstring,'a') as f:
-            f.write('Jogador' + str(player.idJogador)+":" + bet + ":" + str(value))
+            f.write('Jogador' + str(player.idJogador)+":" + bet + ":" + str(value)+"\n")
         
         print('Jogador' + str(player.idJogador)+":" + bet + ":" + str(value))
     
