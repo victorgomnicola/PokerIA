@@ -67,7 +67,7 @@ class Mesa:
             playerTurn = self.apostar(game_logger, playerTurn)
         
             #show results
-            winners = self.Verificador.matchWinner(self.cartas, self.jogadores)
+            winners = self.Verificador.matchWinner(self.cartas, [jogador for jogador in enumerate(self.jogadores) if jogador[1].estaJogando])
             
             for w in winners:
                 self.jogadores[w].montante += self.valorMesa/len(winners)

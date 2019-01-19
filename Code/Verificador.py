@@ -126,10 +126,12 @@ class Verificador:
 			if( score == best_score and best_hand[0][1]< h[0][1]):
 				best_hand = h
 
+		print(best_score, best_hand)
 		return (best_score, best_hand)
 
 	def matchWinner(self, table_cards, players):
-		player_scores = [self.playerResults(table_cards+player.mao) for player in players]
+		playerz = [p[1] for p in players]
+		player_scores = [self.playerResults(table_cards+player.mao) for player in playerz]
 		winner_score = 0
 		
 		for score in player_scores:
@@ -166,7 +168,7 @@ class Verificador:
 						potential_winners.pop(0)
 						break
 
-		return potential_winners		
+		return [players[p][0] for p in potential_winners]		
 
 
 	def breakTie(self, score1, score2):

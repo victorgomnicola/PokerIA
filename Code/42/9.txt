@@ -2,41 +2,55 @@ PokerIA game
 Table:42
 Game:9
 Players cards
-Jogador0:('e', 4)/('c', 2)
-Jogador1:('e', 6)/('c', 4)
-Jogador2:('o', 12)/('c', 5)
-Jogador3:('c', 6)/('c', 7)
-Jogador4:('o', 7)/('c', 13)
+Jogador0:('c', 5)/('e', 7)
+Jogador1:('p', 10)/('o', 5)
+Jogador2:('e', 6)/('o', 7)
+Jogador3:('p', 8)/('c', 7)
+Jogador4:('e', 13)/('c', 8)
+Jogador5:('c', 6)/('p', 11)
+Jogador6:('e', 12)/('o', 2)
+Jogador7:('p', 7)/('c', 12)
 Players chips
-Jogador0:2350.0
-Jogador1:3350.0
-Jogador2:2850.0
-Jogador3:3600.0
-Jogador4:2850.0
+Jogador0:-150.0
+Jogador1:-1024.0
+Jogador2:745.0
+Jogador3:1945.0
+Jogador4:745.0
+Jogador5:1395.0
+Jogador6:2095.0
+Jogador7:2745.0
 *******Starting Game*******
-Jogador0:posts_smallBlind:50.0
-Jogador1:posts_bigBlind:100
-Jogador2:calls:100
-Jogador3:calls:100
+Jogador2:posts_smallBlind:50.0
+Jogador3:posts_bigBlind:100
 Jogador4:calls:100
-Jogador0:calls:50.0
+Jogador5:calls:100
+Jogador6:calls:100
+Jogador7:calls:100
+Jogador0:folds:0
+Jogador1:folds:0
+Jogador2:calls:50.0
 *******flop*******
-Cartas na mesa:('p', 12):('o', 2):('o', 3):('b', -1):('b', -1)
-Jogador1:checks:0
-Jogador2:checks:0
+Cartas na mesa:('p', 13):('e', 10):('p', 12):('b', -1):('b', -1)
 Jogador3:checks:0
 Jogador4:checks:0
+Jogador5:checks:0
+Jogador6:checks:0
+Jogador7:checks:0
 *******turn*******
-Cartas na mesa:('p', 12):('o', 2):('o', 3):('p', 9):('b', -1)
-Jogador0:checks:0
-Jogador1:checks:0
+Cartas na mesa:('p', 13):('e', 10):('p', 12):('c', 2):('b', -1)
 Jogador2:checks:0
 Jogador3:checks:0
-*******river*******
-Cartas na mesa:('p', 12):('o', 2):('o', 3):('p', 9):('e', 3)
 Jogador4:checks:0
-Jogador0:checks:0
-Jogador1:checks:0
+Jogador5:checks:0
+Jogador6:checks:0
+Jogador7:checks:0
+*******river*******
+Cartas na mesa:('p', 13):('e', 10):('p', 12):('c', 2):('o', 6)
 Jogador2:checks:0
+Jogador3:checks:0
+Jogador4:checks:0
+Jogador5:checks:0
+Jogador6:checks:0
+Jogador7:checks:0
 *******Winner*******
-Jogador2:won:500.0
+Jogador6:won:600.0
