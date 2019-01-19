@@ -13,7 +13,11 @@ class JogadorSimples(Jogador):
 
 	def getAcao(self, estado, Log):
 		
-		if(self.canCall(estado['valorApostado']) and self.Verificador.playerResults(self.mao+ estado['cartas'])[0]>3):
+		if(estado['cartas'] ==  [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]):
+			return 0
+		
+		evaluation = self.Verificador.playerResults(self.mao+ [carta for carta in estado['cartas'] if carta!=('b',-1)])
+		if(self.canCall(estado['valorApostado']) and evaluation[0]>=2):
 			return 0
 		else:
 			return -1

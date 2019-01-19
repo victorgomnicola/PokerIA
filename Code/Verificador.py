@@ -126,14 +126,17 @@ class Verificador:
 			if( score == best_score and best_hand[0][1]< h[0][1]):
 				best_hand = h
 
-		print(best_score, best_hand)
+
 		return (best_score, best_hand)
 
 	def matchWinner(self, table_cards, players):
 		playerz = [p[1] for p in players]
 		player_scores = [self.playerResults(table_cards+player.mao) for player in playerz]
 		winner_score = 0
-		
+		#################
+		for p in player_scores:
+			print(p)
+		################
 		for score in player_scores:
 			if (score[0]> winner_score):
 				winner_score = score[0]

@@ -2,23 +2,23 @@ PokerIA game
 Table:42
 Game:1
 Players cards
-Jogador0:('c', 8)/('e', 4)
-Jogador1:('c', 9)/('c', 5)
-Jogador2:('c', 7)/('o', 2)
-Jogador3:('e', 5)/('p', 12)
-Jogador4:('o', 5)/('c', 2)
-Jogador5:('c', 6)/('p', 6)
-Jogador6:('p', 7)/('o', 13)
-Jogador7:('p', 3)/('o', 3)
+Jogador0:('o', 3)/('c', 9)
+Jogador1:('p', 7)/('o', 12)
+Jogador2:('p', 2)/('o', 10)
+Jogador3:('p', 8)/('p', 13)
+Jogador4:('c', 2)/('e', 5)
+Jogador5:('e', 10)/('e', 4)
+Jogador6:('c', 10)/('c', 11)
+Jogador7:('p', 9)/('o', 7)
 Players chips
-Jogador0:100
-Jogador1:-874.0
-Jogador2:1545
-Jogador3:1545
-Jogador4:1545
-Jogador5:1545
-Jogador6:1545
-Jogador7:1545
+Jogador0:16374.0
+Jogador1:2950.0
+Jogador2:346
+Jogador3:346
+Jogador4:346
+Jogador5:1596
+Jogador6:1596
+Jogador7:346
 *******Starting Game*******
 Jogador2:posts_smallBlind:50.0
 Jogador3:posts_bigBlind:100
@@ -26,31 +26,25 @@ Jogador4:calls:100
 Jogador5:calls:100
 Jogador6:calls:100
 Jogador7:calls:100
-Jogador0:folds:0
-Jogador1:folds:0
-Jogador2:calls:50.0
+Jogador0:raises:756
+Jogador1:calls:756
+Jogador2:folds:0
+Jogador3:folds:0
+Jogador4:folds:0
+Jogador5:calls:656
+Jogador6:calls:656
+Jogador7:calls:656
 *******flop*******
-Cartas na mesa:('e', 10):('p', 8):('e', 9):('b', -1):('b', -1)
-Jogador3:checks:0
-Jogador4:checks:0
-Jogador5:checks:0
-Jogador6:checks:0
-Jogador7:checks:0
+Cartas na mesa:('e', 3):('e', 13):('o', 8):('b', -1):('b', -1)
+Jogador0:raises:790
+Jogador1:raises:2596
+Jogador5:folds:0
+Jogador6:folds:0
+Jogador7:folds:0
+Jogador0:raises:10296
+Jogador1:folds:0
 *******turn*******
-Cartas na mesa:('e', 10):('p', 8):('e', 9):('o', 12):('b', -1)
-Jogador2:checks:0
-Jogador3:checks:0
-Jogador4:checks:0
-Jogador5:checks:0
-Jogador6:checks:0
-Jogador7:checks:0
+Cartas na mesa:('e', 3):('e', 13):('o', 8):('c', 4):('b', -1)
+Jogador0:folds:0
 *******river*******
-Cartas na mesa:('e', 10):('p', 8):('e', 9):('o', 12):('c', 4)
-Jogador2:checks:0
-Jogador3:checks:0
-Jogador4:checks:0
-Jogador5:checks:0
-Jogador6:checks:0
-Jogador7:checks:0
-*******Winner*******
-Jogador3:won:600.0
+Cartas na mesa:('e', 3):('e', 13):('o', 8):('c', 4):('p', 12)
