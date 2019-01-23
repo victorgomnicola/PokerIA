@@ -138,19 +138,16 @@ class Mesa:
         self.cartas[2] = self.baralho.tirarCarta()
         
         logger.log_cartas_viradas('flop',self.cartas)
-        print('Jogando',[j.idJogador for j in self.jogadores if j.estaJogando])
 
     def turn(self, logger):
         self.cartas[3] = self.baralho.tirarCarta()
         
         logger.log_cartas_viradas('turn',self.cartas)
-        print('Jogando',[j.idJogador for j in self.jogadores if j.estaJogando])
          
     def river(self, logger):
         self.cartas[4] = self.baralho.tirarCarta()
         
         logger.log_cartas_viradas('river',self.cartas)
-        print('Jogando',[j.idJogador for j in self.jogadores if j.estaJogando])
 
     def reset_mesa(self):
         

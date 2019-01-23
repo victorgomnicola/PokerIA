@@ -1,15 +1,16 @@
 PokerIA game 
 Table:42
 Game:0
+Number_of_players:8
 Players cards
-Jogador0:('e', 13)/('e', 5)
-Jogador1:('o', 13)/('o', 10)
-Jogador2:('e', 2)/('p', 6)
-Jogador3:('o', 2)/('p', 10)
-Jogador4:('o', 8)/('c', 3)
-Jogador5:('o', 12)/('p', 7)
-Jogador6:('e', 9)/('c', 8)
-Jogador7:('c', 10)/('c', 7)
+Jogador0:('c', 3):('p', 3)
+Jogador1:('c', 10):('c', 8)
+Jogador2:('e', 12):('c', 14)
+Jogador3:('o', 2):('p', 2)
+Jogador4:('o', 6):('p', 11)
+Jogador5:('e', 6):('e', 9)
+Jogador6:('p', 7):('o', 11)
+Jogador7:('p', 13):('e', 3)
 Players chips
 Jogador0:3000
 Jogador1:3000
@@ -19,43 +20,42 @@ Jogador4:3000
 Jogador5:3000
 Jogador6:3000
 Jogador7:3000
-*******Starting Game*******
-Jogador1:posts_smallBlind:50.0
-Jogador2:posts_bigBlind:100
+***Starting Game***
+Jogador1:smallBlind:50.0
+Jogador2:bigBlind:100
 Jogador3:calls:100
 Jogador4:calls:100
 Jogador5:calls:100
 Jogador6:calls:100
 Jogador7:calls:100
-Jogador0:raises:1404
-Jogador1:folds:0
-Jogador2:calls:1304
-Jogador3:calls:1304
-Jogador4:calls:1304
-Jogador5:calls:1304
-Jogador6:calls:1304
-Jogador7:calls:1304
-*******flop*******
-Cartas na mesa:('o', 4):('p', 2):('c', 5):('b', -1):('b', -1)
-Jogador0:checks:0
+Jogador0:calls:100
+Jogador1:calls:50.0
+***flop***
+Cartas na mesa:('p', 14):('e', 11):('o', 3):('b', -1):('b', -1)
 Jogador2:checks:0
 Jogador3:checks:0
 Jogador4:checks:0
-Jogador5:folds:0
-Jogador6:folds:0
-*******turn*******
-Cartas na mesa:('o', 4):('p', 2):('c', 5):('e', 7):('b', -1)
+Jogador5:checks:0
+Jogador6:checks:0
 Jogador7:checks:0
-Jogador0:raises:1250
-Jogador2:calls:1250
-Jogador3:calls:1250
-Jogador4:calls:1250
-Jogador7:calls:1250
-*******river*******
-Cartas na mesa:('o', 4):('p', 2):('c', 5):('e', 7):('c', 13)
 Jogador0:checks:0
+***turn***
+Cartas na mesa:('p', 14):('e', 11):('o', 3):('p', 9):('b', -1)
+Jogador1:checks:0
 Jogador2:checks:0
 Jogador3:checks:0
 Jogador4:checks:0
-*******Winner*******
-Jogador0:won:16028.0
+Jogador5:checks:0
+Jogador6:checks:0
+Jogador7:checks:0
+***river***
+Cartas na mesa:('p', 14):('e', 11):('o', 3):('p', 9):('e', 13)
+Jogador0:checks:0
+Jogador1:checks:0
+Jogador2:checks:0
+Jogador3:checks:0
+Jogador4:checks:0
+Jogador5:checks:0
+Jogador6:checks:0
+***Winner***
+Jogador0:won:800.0

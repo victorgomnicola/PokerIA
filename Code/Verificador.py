@@ -134,8 +134,8 @@ class Verificador:
 		player_scores = [self.playerResults(table_cards+player.mao) for player in playerz]
 		winner_score = 0
 		#################
-		for p in player_scores:
-			print(p)
+		# for p in player_scores:
+			# print(p)
 		################
 		for score in player_scores:
 			if (score[0]> winner_score):
