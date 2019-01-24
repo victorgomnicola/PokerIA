@@ -50,21 +50,21 @@ class Mesa:
             game_logger.log_start(self.jogadores,button,self.bigBlind)
 
             #Betting starts
-            playerTurn = (button +3) % self.nJogadores
-            playerTurn = self.apostar(game_logger, playerTurn)
-            
+            self.apostar(game_logger, (button +3) % self.nJogadores)
+
             #Flop
+            playerTurn = (button +1) % self.nJogadores
             self.flop(game_logger)
-            playerTurn = self.apostar(game_logger, playerTurn)
+            self.apostar2(game_logger, playerTurn)
             
             #Turn
             self.turn(game_logger)
-            playerTurn = self.apostar(game_logger, playerTurn)
+            self.apostar2(game_logger, playerTurn)
             
             
             #River
             self.river(game_logger)
-            playerTurn = self.apostar(game_logger, playerTurn)
+            self.apostar2(game_logger, playerTurn)
         
             #show results
             winners = self.Verificador.matchWinner(self.cartas, [jogador for jogador in enumerate(self.jogadores) if jogador[1].estaJogando])
@@ -129,8 +129,51 @@ class Mesa:
                     raise ValueError('No valid action value')
 
             playerTurn = (playerTurn+1)%self.nJogadores
+
+    def apostar2(self, logger, t):
         
-        return raise_marker
+        playerTurn = t
+        raise_marker = (playerTurn+self.nJogadores-1)%self.nJogadores
+        n_raises = 0
+
+        while(True):
+            
+            if(self.jogadores[playerTurn].estaJogando):
+
+                action = self.jogadores[playerTurn].getAcao({'valorMesa':self.valorMesa, 'cartas': self.cartas, 'valorApostado':self.valorApostado, 'canRaise':  n_raises< self.raiseCaps}, {'table': self.idMesa, 'game':logger.game})                
+                if(action==-1):
+                    ##Player folds
+                    self.jogadores[playerTurn].estaJogando= False
+                    logger.log_bet(self.jogadores[playerTurn], 'folds', 0)
+                
+                elif(action==0):
+                    
+                    ##Player checks or checks
+                    call_dif = self.jogadores[playerTurn].call(self.valorApostado)
+                    self.valorMesa += call_dif
+                    if call_dif >0:
+                        logger.log_bet(self.jogadores[playerTurn], 'calls', call_dif)
+                    if call_dif == 0:
+                        logger.log_bet(self.jogadores[playerTurn],'checks', 0)
+                
+                elif(action>0):
+                    ##Player raises
+                    raise_dif = self.jogadores[playerTurn].call(self.valorApostado + action)
+                    self.valorApostado += action
+                    self.valorMesa += action
+                    raise_marker = playerTurn
+                    logger.log_bet(self.jogadores[playerTurn], 'raises', raise_dif)
+                    n_raises = n_raises + 1
+
+                else:
+                    raise ValueError('No valid action value')
+                
+                if raise_marker == playerTurn:
+                    break
+
+            playerTurn = (playerTurn+1)%self.nJogadores
+
+
 
     def flop(self, logger):
         self.cartas[0] = self.baralho.tirarCarta()

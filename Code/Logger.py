@@ -26,6 +26,7 @@ class Logger:
 
         with open(self.log_hyperstring,'a') as f:
             f.write("***Starting Game***\n")
+            f.write("Cartas na mesa:('b', -1):('b', -1):('b', -1):('b', -1):('b', -1)\n")
             f.write('Jogador' + str(jogadores[(button+1)%len(jogadores)].idJogador) + ':smallBlind:' + str(big_blind/2) + "\n")
             f.write('Jogador' + str(jogadores[(button+2)%len(jogadores)].idJogador) + ':bigBlind:' + str(big_blind) + "\n")
 

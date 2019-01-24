@@ -2,6 +2,7 @@ import pygame
 from Mesa import Mesa
 from JogadorRandomico import JogadorRandomico
 from LogParser import LogParser
+import os
 import subprocess
 
 pygame.init()
@@ -173,23 +174,30 @@ def render_info():
 	header_n = font3.render("Digite up or down para ver o log", True,(0,0,0))
 	screen.blit(header_n, (dx,dy))
 
+
 ### GAME VARIABLES
 info_flag = False
 log_head = 0
 log_lenght = 4
+clock_ticks = 0
 
 
 
 #POKER ENGINE 
 t_number = '42'
 PokerEngine = subprocess.Popen(['python','main.py',t_number], stdin = subprocess.PIPE, stdout = subprocess.PIPE)
+######
+#Waits for the log file to be created
+while(len(os.listdir("./"+t_number))==0):
+	pass
+#####
 logparser = LogParser("./"+t_number+"/0.txt")
 game_number = 0
-valor_mesa , valor_apostado  = logparser.get_stats()
 montante_player = 3000
 table_cards = [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]
 player_cards = logparser.get_player_cards(0)
 logg = logparser.read_log()
+valor_mesa , valor_apostado  = logparser.get_stats()
 
 ##### INFORS
 game_header = font.render("PorkaIA - a poker game", True, WHITE)
@@ -200,6 +208,14 @@ table_value = font2.render("Valor na mesa = "+str(valor_mesa), True,WHITE)
 montante = font2.render("Montante: "+str(montante_player), True,WHITE)
 log_label = font3.render("log das jogadas", True,WHITE)
 
+
+def update_values():
+	
+	global valor_mesa , valor_apostado , table_cards, player_cards, logg, montante, montante_player
+	valor_mesa , valor_apostado  = logparser.get_stats()
+	table_cards = logparser.parse_cards_on_the_table()
+	player_cards = logparser.get_player_cards(0)
+	logg = logparser.read_log()
 
 def flush_action(actionn):
 	global valor_mesa , valor_apostado , table_cards, player_cards, logg, montante, montante_player
@@ -272,7 +288,13 @@ while not done:
 		render_button()
 		render_table_name()
 		render_log(logg[max(0,log_head):(log_head+log_lenght)])
+		
 		if(info_flag):
 			render_info()   
+		
 		pygame.display.flip()
 		clock.tick(60)
+		clock_ticks = (clock_ticks+1)%61
+		
+		if(clock_ticks ==60):
+			update_values()

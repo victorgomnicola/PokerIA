@@ -1,10 +1,10 @@
 
-
 class LogParser:
 
 	def __init__(self, log_file):
 		self.log_file = log_file
 		self.lines=[]
+		self.game_over = False
 	
 	def parse_cards_on_the_table(self):
 
@@ -67,3 +67,6 @@ class LogParser:
 	def readz(self):
 		with open(self.log_file,'r') as f:
 			self.lines= [s.replace("\n","") for s in f.readlines()]
+			
+			if "Winner" in self.lines:
+				self.game_over = True
