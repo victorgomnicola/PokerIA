@@ -3,23 +3,23 @@ Table:42
 Game:2
 Number_of_players:8
 Players cards
-Jogador0:('p', 14):('e', 4)
-Jogador1:('e', 12):('e', 14)
-Jogador2:('c', 6):('c', 8)
-Jogador3:('c', 4):('c', 12)
-Jogador4:('p', 2):('o', 13)
-Jogador5:('e', 7):('p', 8)
-Jogador6:('c', 14):('o', 9)
-Jogador7:('p', 13):('p', 9)
+Jogador0:('e', 5):('e', 13)
+Jogador1:('c', 5):('p', 13)
+Jogador2:('o', 9):('e', 7)
+Jogador3:('o', 2):('c', 2)
+Jogador4:('c', 3):('p', 12)
+Jogador5:('e', 3):('p', 9)
+Jogador6:('p', 14):('e', 14)
+Jogador7:('p', 11):('e', 11)
 Players chips
 Jogador0:2800
-Jogador1:2800.0
+Jogador1:3600.0
 Jogador2:2800.0
 Jogador3:3600.0
 Jogador4:2800
 Jogador5:2800
 Jogador6:2800
-Jogador7:3600.0
+Jogador7:2800
 ***Starting Game***
 Cartas na mesa:('b', -1):('b', -1):('b', -1):('b', -1):('b', -1)
 Jogador3:smallBlind:50.0
@@ -32,7 +32,7 @@ Jogador1:calls:100
 Jogador2:calls:100
 Jogador3:calls:50.0
 ***flop***
-Cartas na mesa:('c', 11):('p', 11):('c', 10):('b', -1):('b', -1)
+Cartas na mesa:('c', 13):('e', 2):('p', 4):('b', -1):('b', -1)
 Jogador3:checks:0
 Jogador4:checks:0
 Jogador5:checks:0
@@ -42,7 +42,7 @@ Jogador0:checks:0
 Jogador1:checks:0
 Jogador2:checks:0
 ***turn***
-Cartas na mesa:('c', 11):('p', 11):('c', 10):('c', 9):('b', -1)
+Cartas na mesa:('c', 13):('e', 2):('p', 4):('c', 8):('b', -1)
 Jogador3:checks:0
 Jogador4:checks:0
 Jogador5:checks:0
@@ -52,7 +52,7 @@ Jogador0:checks:0
 Jogador1:checks:0
 Jogador2:checks:0
 ***river***
-Cartas na mesa:('c', 11):('p', 11):('c', 10):('c', 9):('p', 6)
+Cartas na mesa:('c', 13):('e', 2):('p', 4):('c', 8):('c', 9)
 Jogador3:checks:0
 Jogador4:checks:0
 Jogador5:checks:0
