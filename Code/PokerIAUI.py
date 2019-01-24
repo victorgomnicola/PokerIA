@@ -16,6 +16,7 @@ pygame.display.set_caption('PorkarIA')
 
 #####FONTS
 WHITE = (225,225,225)
+BLACK = (0,0,0)
 font = pygame.font.SysFont("comicsansms", 36)
 font2 = pygame.font.SysFont("comicsansms", 30)
 font3 = pygame.font.SysFont("comicsansms", 20)
@@ -145,34 +146,45 @@ def render_info():
 
 	pygame.draw.rect(screen, (230,230,250), (dx,dy, render_info_size_x, render_info_size_y))
 	
-	header_info = font3.render("Instruções de jogo", True,(0,0,0))
+	header_info = font3.render("Instruções de jogo", True,BLACK)
 	screen.blit(header_info, (dx+ (render_info_size_x - header_info.get_width())/2,dy+10))
 
 	dy+= 60
 	dx+=10
-	header_q = font3.render("Q: Para Instruções do jogo", True,(0,0,0))
+	header_q = font3.render("Q: Para Instruções do jogo", True,BLACK)
 	screen.blit(header_q, (dx,dy))
 	dy+= 35
-	header_c = font3.render("C: Para call", True,(0,0,0))
+	header_c = font3.render("C: Para call", True,BLACK)
 	screen.blit(header_c, (dx,dy))
 	dy+= 35
-	header_f = font3.render("F: Para fold", True,(0,0,0))
+	header_f = font3.render("F: Para fold", True,BLACK)
 	screen.blit(header_f, (dx,dy))
 	dy+= 35
-	header_x = font3.render("X: Para check", True,(0,0,0))
+	header_x = font3.render("X: Para check", True,BLACK)
 	screen.blit(header_x, (dx,dy))
 	dy+= 35
-	header_r = font3.render("R: Para raise", True,(0,0,0))
+	header_r = font3.render("R: Para raise", True,BLACK)
 	screen.blit(header_r, (dx,dy))
 	dy+= 35
-	header_r = font3.render("Ç: Para recomeçar", True,(0,0,0))
+	header_r = font3.render("Ç: Para recomeçar", True,BLACK)
 	screen.blit(header_r, (dx,dy))
 	dy+= 35
-	header_n = font3.render("Digite os numeros para aumentar a aposta", True,(0,0,0))
+	header_n = font3.render("Digite os numeros para aumentar a aposta", True,BLACK)
 	screen.blit(header_n, (dx,dy))
 	dy+= 35
-	header_n = font3.render("Digite up or down para ver o log", True,(0,0,0))
+	header_n = font3.render("Digite up or down para ver o log", True,BLACK)
 	screen.blit(header_n, (dx,dy))
+
+
+def render_message(message):
+
+	dx = screen_width*0.30
+	dy = screen_height*0.30
+	render_info_size_x = screen_width*0.5
+	render_info_size_y =screen_height*0.5
+	pygame.draw.rect(screen, (230,230,250), (dx,dy, render_info_size_x, render_info_size_y))
+	message_font = font.render(message, True, BLACK)
+	screen.blit(message_font,(dx+ (render_info_size_x - message_font.get_width())/2,dy+render_info_size_y*0.4) )
 
 
 ### GAME VARIABLES
@@ -198,6 +210,7 @@ table_cards = [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]
 player_cards = logparser.get_player_cards(0)
 logg = logparser.read_log()
 valor_mesa , valor_apostado  = logparser.get_stats()
+game_over = False
 
 ##### INFORS
 game_header = font.render("PorkaIA - a poker game", True, WHITE)
@@ -208,14 +221,31 @@ table_value = font2.render("Valor na mesa = "+str(valor_mesa), True,WHITE)
 montante = font2.render("Montante: "+str(montante_player), True,WHITE)
 log_label = font3.render("log das jogadas", True,WHITE)
 
+def render_game():
+	screen.fill((0,100,0))
+	screen.blit(game_header, (((screen_width-game_header.get_width())/2, screen_height/20))) 
+	render_cards(table_cards)
+	render_player(player_cards)
+	render_stats()
+	render_button()
+	render_table_name()
+	render_log(logg[max(0,log_head):(log_head+log_lenght)])
+	
+	global game_over
+	if(game_over):
+		global logparser, game_number
+		game_number+=1
+		logparser = LogParser("./"+t_number+"/"+str(game_number)+".txt")
+		game_over = False
 
 def update_values():
 	
-	global valor_mesa , valor_apostado , table_cards, player_cards, logg, montante, montante_player
+	global valor_mesa , valor_apostado , table_cards, player_cards, logg, montante, montante_player, game_over
 	valor_mesa , valor_apostado  = logparser.get_stats()
 	table_cards = logparser.parse_cards_on_the_table()
 	player_cards = logparser.get_player_cards(0)
 	logg = logparser.read_log()
+	game_over = logparser.game_over
 
 def flush_action(actionn):
 	global valor_mesa , valor_apostado , table_cards, player_cards, logg, montante, montante_player
@@ -280,15 +310,9 @@ while not done:
 					raise_string+="9"	
 				raise_button =  font2.render(raise_string, True,WHITE)
 	
-		screen.fill((0,100,0))
-		screen.blit(game_header, (((screen_width-game_header.get_width())/2, screen_height/20))) 
-		render_cards(table_cards)
-		render_player(player_cards)
-		render_stats()
-		render_button()
-		render_table_name()
-		render_log(logg[max(0,log_head):(log_head+log_lenght)])
-		
+
+		render_game()
+
 		if(info_flag):
 			render_info()   
 		

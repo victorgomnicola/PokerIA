@@ -68,5 +68,6 @@ class LogParser:
 		with open(self.log_file,'r') as f:
 			self.lines= [s.replace("\n","") for s in f.readlines()]
 			
-			if "Winner" in self.lines:
-				self.game_over = True
+			for l in self.lines:
+				if "Winner" in l:
+					self.game_over = True
