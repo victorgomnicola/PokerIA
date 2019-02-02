@@ -26,13 +26,13 @@ class Mesa:
         self.raiseCaps = raiseCaps
         self.valorMesa = 0
         self.valorApostado = 0
-        self.cartas = [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]
+        self.cartas = [('b',-1), ('b',-1), ('b',-1), ('b',-1), ('b',-1)]
         self.Verificador = Verificador()
 
 
     def eliminate_poor(self):
         for p in self.jogadores:
-            if p.montante<100:
+            if p.montante < 100:
                 p.shut_down()
                 self.jogadores.remove(p)
         self.nJogadores = len(self.jogadores)
@@ -44,10 +44,10 @@ class Mesa:
             #Game setup
             self.eliminate_poor()
             print(i)
-            button = (i+self.nJogadores)%self.nJogadores
+            button = (i + self.nJogadores)%self.nJogadores
             
             while not self.jogadores[button].estaJogando:
-                button-=1
+                button -= 1
 
             self.baralho.iniciarBaralho()
             self.distribuirCartas(button)
@@ -60,20 +60,19 @@ class Mesa:
 
             #Start game
             self.comecarJogo(button)
-            game_logger.log_start(self.jogadores,button,self.bigBlind)
+            game_logger.log_start(self.jogadores, button, self.bigBlind)
 
             #Betting starts
-            self.apostar(game_logger, (button +3) % self.nJogadores)
+            self.apostar(game_logger, (button +3)%self.nJogadores)
 
             #Flop
-            playerTurn = (button +1) % self.nJogadores
+            playerTurn = (button + 1)%self.nJogadores
             self.flop(game_logger)
             self.apostar(game_logger, playerTurn)
             
             #Turn
             self.turn(game_logger)
             self.apostar(game_logger, playerTurn)
-            
             
             #River
             self.river(game_logger)
@@ -111,7 +110,7 @@ class Mesa:
         raise_marker = (playerTurn+self.nJogadores-1)%self.nJogadores
         
         while not self.jogadores[raise_marker].estaJogando:
-            raise_marker-=1
+            raise_marker = (raiz_marker-1+self.nJogadores)%nJogadores
 
         n_raises = 0
 

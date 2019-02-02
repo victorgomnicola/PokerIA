@@ -5,13 +5,22 @@ from LogParser import LogParser
 import os
 import subprocess
 
+#inicializa tela
 pygame.init()
+
+#define propriedades da tela
 screen_width = 800
 screen_height = 600
 card_scaling_factor = 0.75
 screen = pygame.display.set_mode((screen_width, screen_height))
+
+#clock eh a quantidade de frames renderizados por segundo
 clock = pygame.time.Clock()
+
+#flag para continuar renderizando o jogo
 done = False
+
+#Cria o titulo do jogo
 pygame.display.set_caption('PorkarIA')
 
 #####FONTS
@@ -23,11 +32,11 @@ font3 = pygame.font.SysFont("comicsansms", 20)
 
 
 ###BUTTONS 
-check_button = font2.render("check", True,WHITE)
-call_button = font2.render("call", True,WHITE)
-fold_button = font2.render("fold", True,WHITE)
+check_button = font2.render("check", True, WHITE)
+call_button = font2.render("call", True, WHITE)
+fold_button = font2.render("fold", True, WHITE)
 raise_string = "raise 100"
-raise_button =  font2.render(raise_string, True,WHITE)
+raise_button =  font2.render(raise_string, True, WHITE)
 
 def render_button():
 
@@ -36,6 +45,7 @@ def render_button():
 	button_external_spacing = 8
 	dx  = screen.get_width()/30*13.5
 	dy = screen_height/10*6
+    
 	#####CHECK BUTTON
 	pygame.draw.rect(screen,(34,139,34), (dx, dy, check_button.get_width()+2*button_x_spacing, check_button.get_height()+2*button_y_spacing))
 	screen.blit(check_button, (dx+button_x_spacing,dy+button_y_spacing))
@@ -197,13 +207,13 @@ clock_ticks = 0
 
 #POKER ENGINE 
 t_number = '42'
-PokerEngine = subprocess.Popen(['python','main.py',t_number], stdin = subprocess.PIPE, stdout = subprocess.PIPE)
+PokerEngine = subprocess.Popen(['python','main.py', t_number], stdin = subprocess.PIPE, stdout = subprocess.PIPE)
 ######
 #Waits for the log file to be created
-while(len(os.listdir("./"+t_number))==0):
+while(len(os.listdir("./" + t_number))==0):
 	pass
 #####
-logparser = LogParser("./"+t_number+"/0.txt")
+logparser = LogParser("./" + t_number+"/0.txt")
 game_number = 0
 montante_player = 3000
 table_cards = [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]
@@ -234,8 +244,8 @@ def render_game():
 	global game_over
 	if(game_over):
 		global logparser, game_number
-		game_number+=1
-		logparser = LogParser("./"+t_number+"/"+str(game_number)+".txt")
+		game_number += 1
+		logparser = LogParser("./" + t_number +"/"+str(game_number)+".txt")
 		game_over = False
 
 def update_values():
@@ -248,12 +258,12 @@ def update_values():
 	game_over = logparser.game_over
 
 def flush_action(actionn):
-	global valor_mesa , valor_apostado , table_cards, player_cards, logg, montante, montante_player
-	aa = actionn+"\n"
+	global valor_mesa, valor_apostado, table_cards, player_cards, logg, montante, montante_player
+	aa = actionn + "\n"
 	PokerEngine.stdin.write(aa.encode())
 	PokerEngine.stdin.flush()
-	montante_player=int(PokerEngine.stdout.readline())
-	montante = font2.render("Montante: "+str(montante_player), True,WHITE)
+	montante_player = int(PokerEngine.stdout.readline())
+	montante = font2.render("Montante: " + str(montante_player), True, WHITE)
 	valor_mesa , valor_apostado  = logparser.get_stats()
 	table_cards = logparser.parse_cards_on_the_table()
 	player_cards = logparser.get_player_cards(0)
@@ -289,26 +299,26 @@ while not done:
 				raise_button =  font2.render(raise_string, True,WHITE)  
 			if event.type == pygame.KEYDOWN and event.key in [pygame.K_0,pygame.K_1, pygame.K_2, pygame.K_3, pygame.K_4, pygame.K_5, pygame.K_6, pygame.K_7, pygame.K_8, pygame.K_9]:
 				if event.key== pygame.K_0:
-					raise_string+="0"
+					raise_string += "0"
 				if event.key== pygame.K_1:
-					raise_string+="1"
+					raise_string += "1"
 				if event.key== pygame.K_2:
-					raise_string+="2"
+					raise_string += "2"
 				if event.key== pygame.K_3:
-					raise_string+="3"
+					raise_string += "3"
 				if event.key== pygame.K_4:
-					raise_string+="4"
+					raise_string += "4"
 				if event.key== pygame.K_5:
-					raise_string+="5"
+					raise_string += "5"
 				if event.key== pygame.K_6:
-					raise_string+="6"
+					raise_string += "6"
 				if event.key== pygame.K_7:
-					raise_string+="7"
+					raise_string += "7"
 				if event.key== pygame.K_8:
-					raise_string+="8"
+					raise_string += "8"
 				if event.key== pygame.K_9:
-					raise_string+="9"	
-				raise_button =  font2.render(raise_string, True,WHITE)
+					raise_string += "9"	
+				raise_button = font2.render(raise_string, True,WHITE)
 	
 
 		render_game()
@@ -320,5 +330,5 @@ while not done:
 		clock.tick(60)
 		clock_ticks = (clock_ticks+1)%61
 		
-		if(clock_ticks ==60):
+		if(clock_ticks == 60):
 			update_values()

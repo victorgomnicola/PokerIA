@@ -1,0 +1,72 @@
+PokerIA game 
+Table:42
+Game:2
+Number_of_players:9
+Players cards
+Jogador0:('c', 2):('o', 2)
+Jogador1:('c', 3):('o', 4)
+Jogador2:('c', 10):('e', 10)
+Jogador3:('o', 8):('c', 12)
+Jogador4:('p', 9):('e', 12)
+Jogador5:('e', 14):('o', 14)
+Jogador6:('c', 6):('p', 3)
+Jogador7:('p', 14):('o', 7)
+Jogador8:('p', 8):('o', 3)
+Players chips
+Jogador0:2800
+Jogador1:2800.0
+Jogador2:3100.0
+Jogador3:3100.0
+Jogador4:3100.0
+Jogador5:2800
+Jogador6:2800
+Jogador7:2800
+Jogador8:3700.0
+***Starting Game***
+Cartas na mesa:('b', -1):('b', -1):('b', -1):('b', -1):('b', -1)
+Jogador3:smallBlind:50.0
+Jogador4:bigBlind:100
+Jogador5:calls:100
+Jogador6:calls:100
+Jogador7:calls:100
+Jogador8:calls:100
+Jogador0:calls:100
+Jogador1:calls:100
+Jogador2:calls:100
+Jogador3:calls:50.0
+Jogador4:checks:0
+***flop***
+Cartas na mesa:('e', 13):('o', 9):('p', 12):('b', -1):('b', -1)
+Jogador3:checks:0
+Jogador4:checks:0
+Jogador5:checks:0
+Jogador6:checks:0
+Jogador7:checks:0
+Jogador8:checks:0
+Jogador0:checks:0
+Jogador1:checks:0
+Jogador2:checks:0
+***turn***
+Cartas na mesa:('e', 13):('o', 9):('p', 12):('e', 7):('b', -1)
+Jogador3:checks:0
+Jogador4:checks:0
+Jogador5:checks:0
+Jogador6:checks:0
+Jogador7:checks:0
+Jogador8:checks:0
+Jogador0:checks:0
+Jogador1:checks:0
+Jogador2:checks:0
+***river***
+Cartas na mesa:('e', 13):('o', 9):('p', 12):('e', 7):('e', 4)
+Jogador3:checks:0
+Jogador4:checks:0
+Jogador5:checks:0
+Jogador6:checks:0
+Jogador7:checks:0
+Jogador8:checks:0
+Jogador0:checks:0
+Jogador1:checks:0
+Jogador2:checks:0
+***Winner***
+Jogador4:won:900.0
