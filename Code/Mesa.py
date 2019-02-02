@@ -30,12 +30,25 @@ class Mesa:
         self.Verificador = Verificador()
 
 
+    def eliminate_poor(self):
+        for p in self.jogadores:
+            if p.montante<100:
+                p.shut_down()
+                self.jogadores.remove(p)
+        self.nJogadores = len(self.jogadores)
+
     def iniciarJogo(self):
         
-        for i in range(3):
+        for i in range(1000):
 
             #Game setup
-            button = i%self.nJogadores
+            self.eliminate_poor()
+            print(i)
+            button = (i+self.nJogadores)%self.nJogadores
+            
+            while not self.jogadores[button].estaJogando:
+                button-=1
+
             self.baralho.iniciarBaralho()
             self.distribuirCartas(button)
             self.valorMesa = 0
@@ -55,25 +68,28 @@ class Mesa:
             #Flop
             playerTurn = (button +1) % self.nJogadores
             self.flop(game_logger)
-            self.apostar2(game_logger, playerTurn)
+            self.apostar(game_logger, playerTurn)
             
             #Turn
             self.turn(game_logger)
-            self.apostar2(game_logger, playerTurn)
+            self.apostar(game_logger, playerTurn)
             
             
             #River
             self.river(game_logger)
-            self.apostar2(game_logger, playerTurn)
+            self.apostar(game_logger, playerTurn)
         
             #show results
             winners = self.Verificador.matchWinner(self.cartas, [jogador for jogador in enumerate(self.jogadores) if jogador[1].estaJogando])
             
             for w in winners:
-                self.jogadores[w].montante += self.valorMesa/len(winners)
+                self.jogadores[w].reward(self.valorMesa/len(winners))
                 game_logger.log_win(self.jogadores[w], self.valorMesa/len(winners))
 
             self.reset_mesa()
+
+        for p in self.jogadores:
+            p.shut_down()
 
     def distribuirCartas(self, button):
         
@@ -89,51 +105,14 @@ class Mesa:
             
 
 
-
     def apostar(self, logger, t):
         
         playerTurn = t
         raise_marker = (playerTurn+self.nJogadores-1)%self.nJogadores
-        n_raises = 0
-
-        while(raise_marker != playerTurn):
-            
-            if(self.jogadores[playerTurn].estaJogando):
-
-                action = self.jogadores[playerTurn].getAcao({'valorMesa':self.valorMesa, 'cartas': self.cartas, 'valorApostado':self.valorApostado, 'canRaise':  n_raises< self.raiseCaps}, {'table': self.idMesa, 'game':logger.game})                
-                if(action==-1):
-                    ##Player folds
-                    self.jogadores[playerTurn].estaJogando= False
-                    logger.log_bet(self.jogadores[playerTurn], 'folds', 0)
-                
-                elif(action==0):
-                    
-                    ##Player checks or checks
-                    call_dif = self.jogadores[playerTurn].call(self.valorApostado)
-                    self.valorMesa += call_dif
-                    if call_dif >0:
-                        logger.log_bet(self.jogadores[playerTurn], 'calls', call_dif)
-                    if call_dif == 0:
-                        logger.log_bet(self.jogadores[playerTurn],'checks', 0)
-                
-                elif(action>0):
-                    ##Player raises
-                    raise_dif = self.jogadores[playerTurn].call(self.valorApostado + action)
-                    self.valorApostado += action
-                    self.valorMesa += action
-                    raise_marker = playerTurn
-                    logger.log_bet(self.jogadores[playerTurn], 'raises', raise_dif)
-                    n_raises = n_raises + 1
-
-                else:
-                    raise ValueError('No valid action value')
-
-            playerTurn = (playerTurn+1)%self.nJogadores
-
-    def apostar2(self, logger, t):
         
-        playerTurn = t
-        raise_marker = (playerTurn+self.nJogadores-1)%self.nJogadores
+        while not self.jogadores[raise_marker].estaJogando:
+            raise_marker-=1
+
         n_raises = 0
 
         while(True):
@@ -201,3 +180,4 @@ class Mesa:
             jogador.reset()
         self.cartas = [('b',-1),('b',-1),('b',-1),('b',-1),('b',-1)]
         self.baralho.iniciarBaralho()
+

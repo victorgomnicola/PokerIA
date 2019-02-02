@@ -37,4 +37,11 @@ class Jogador:
         if(self.montante+self.aposta -mesa_aposta<0):
             return False
         return True
+
+    def reward(self, amount):
+
+        self.montante+=amount
+        
+    def shut_down(self):
+        pass
     
